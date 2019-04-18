@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [{
   path: '',
@@ -8,11 +9,13 @@ const routes: Routes = [{
   redirectTo: 'dashboard'
 }, {
   path: 'dashboard',
-  loadChildren: './pages/dashboard/dashboard.module#DashboardModule'
+  loadChildren: './pages/dashboard/dashboard.module#DashboardModule',
+  canActivate: [AuthGuard]
 }, {
   path: 'recipes',
   loadChildren: './pages/recipe/recipe.module#RecipeModule'
-}, {
+},
+{
   path: '404',
   component: NotfoundComponent
 }, {
