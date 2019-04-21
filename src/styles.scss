@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  // https://colorhunt.co/palette/71302
+  --kale: #{darken(#a8e6cf, 9%)};
+  --lettuce: #{darken(#dcedc1, 6%)};
+  --carrot: #{darken(#ffd3b6, 3%)};
+  --tomato: #{darken(#ffaaa5, 3%)};
+
+  --black: #000;
+  --carbon: #444;
+  --white: #fff;
+
+  --primary-color: var(--kale);
+  --accent-color: var(--carrot);
+  --text-color: var(--carbon);
+
+  --success: var(--lettuce);
+  --warn: var(--carrot);
+  --danger: var(--tomato);
+}
