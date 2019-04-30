@@ -12,6 +12,7 @@ import { LoginComponent } from './components/login/login.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { AuthState } from './shared/state/auth.state';
 import { CoreModule } from './core/core.module';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { CoreModule } from './core/core.module';
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     NgxsModule.forRoot([AuthState], {
       developmentMode: !environment.production
     }),
