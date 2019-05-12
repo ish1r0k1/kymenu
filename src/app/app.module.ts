@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
@@ -9,9 +9,9 @@ import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
+import { CoreModule } from './core/core.module';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { AuthState } from './shared/state/auth.state';
-import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +23,7 @@ import { CoreModule } from './core/core.module';
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     NgxsModule.forRoot([AuthState], {
       developmentMode: !environment.production
     }),
