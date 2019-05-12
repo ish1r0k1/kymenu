@@ -88,7 +88,7 @@ export class AuthState implements NgxsOnInit {
 
   @Action(LoginRedirect)
   onLoginRedirect(ctx: StateContext<AuthStateModel>) {
-    console.log('onLoginRedirect, navigating to /auth/login')
+    console.log('onLoginRedirect, navigating to /login')
     ctx.dispatch(new Navigate(['/login']))
   }
 
