@@ -24,11 +24,17 @@ import { Navigate } from '@ngxs/router-plugin'
 @State<AuthStateModel>({
   name: 'auth',
   defaults: {
-    user: null
+    user: null,
+    initialized: false
   }
 })
 export class AuthState implements NgxsOnInit {
   constructor(private afAuth: AngularFireAuth) {}
+
+  @Selector()
+  static getInitialized(state: AuthStateModel): boolean {
+    return state.initialized
+  }
 
   @Selector()
   static getUser(state: AuthStateModel) {
@@ -44,6 +50,8 @@ export class AuthState implements NgxsOnInit {
     return this.afAuth.authState.pipe(
       take(1),
       tap((user: User) => {
+        ctx.patchState({ initialized: true })
+
         if (user) {
           console.log(`CheckSession: ${user.displayName} is logged in`)
           ctx.dispatch(new LoginSuccess(user))

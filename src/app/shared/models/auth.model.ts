@@ -3,5 +3,6 @@ import { UserInfo } from "firebase";
 export type User = UserInfo
 
 export interface AuthStateModel {
-  user: UserInfo | null
+  user: UserInfo | null,
+  initialized: boolean
 }
