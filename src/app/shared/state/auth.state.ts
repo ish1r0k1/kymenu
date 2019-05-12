@@ -48,16 +48,15 @@ export class AuthState implements NgxsOnInit {
   @Action(CheckSession)
   checkSession(ctx: StateContext<AuthStateModel>) {
     return this.afAuth.authState.pipe(
-      take(1),
       tap((user: User) => {
-        ctx.patchState({ initialized: true })
-
         if (user) {
           console.log(`CheckSession: ${user.displayName} is logged in`)
           ctx.dispatch(new LoginSuccess(user))
-          return
+        } else {
+          console.log('CheckSession: no user found')
         }
-        console.log('CheckSession: no user found')
+
+        ctx.patchState({ initialized: true })
       })
     )
   }
