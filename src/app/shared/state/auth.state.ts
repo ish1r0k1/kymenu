@@ -24,11 +24,17 @@ import { Navigate } from '@ngxs/router-plugin'
 @State<AuthStateModel>({
   name: 'auth',
   defaults: {
-    user: null
+    user: null,
+    initialized: false
   }
 })
 export class AuthState implements NgxsOnInit {
   constructor(private afAuth: AngularFireAuth) {}
+
+  @Selector()
+  static getInitialized(state: AuthStateModel): boolean {
+    return state.initialized
+  }
 
   @Selector()
   static getUser(state: AuthStateModel) {
@@ -42,14 +48,15 @@ export class AuthState implements NgxsOnInit {
   @Action(CheckSession)
   checkSession(ctx: StateContext<AuthStateModel>) {
     return this.afAuth.authState.pipe(
-      take(1),
       tap((user: User) => {
         if (user) {
           console.log(`CheckSession: ${user.displayName} is logged in`)
           ctx.dispatch(new LoginSuccess(user))
-          return
+        } else {
+          console.log('CheckSession: no user found')
         }
-        console.log('CheckSession: no user found')
+
+        ctx.patchState({ initialized: true })
       })
     )
   }
@@ -76,13 +83,12 @@ export class AuthState implements NgxsOnInit {
 
   @Action(LoginSuccess)
   onLoginSuccess(ctx: StateContext<AuthStateModel>) {
-    console.log('onLoginSuccess, navigating to /dashboard')
-    ctx.dispatch(new Navigate(['/dashboard']))
+    console.log('onLoginSuccess')
   }
 
   @Action(LoginRedirect)
   onLoginRedirect(ctx: StateContext<AuthStateModel>) {
-    console.log('onLoginRedirect, navigating to /auth/login')
+    console.log('onLoginRedirect, navigating to /login')
     ctx.dispatch(new Navigate(['/login']))
   }
 
