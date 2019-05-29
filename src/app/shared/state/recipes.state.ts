@@ -1,6 +1,5 @@
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store'
 import { tap } from 'rxjs/operators'
-import { RecipeService } from 'src/app/core/services/recipe.service'
 import {
   GetRecipeDetails,
   GetRecipes,
@@ -9,6 +8,7 @@ import {
   AddRecipeFailure
 } from '../actions/recipes.action'
 import { Recipe, RecipesStateModel } from '../models/recipe.model'
+import { RecipeService } from '../../services/recipe.service';
 
 @State<RecipesStateModel>({
   name: 'recipes',

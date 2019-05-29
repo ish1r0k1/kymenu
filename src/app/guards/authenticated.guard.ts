@@ -1,12 +1,14 @@
-import { Injectable } from '@angular/core'
-import { CanActivate } from '@angular/router'
-import { Store } from '@ngxs/store'
-import { Observable } from 'rxjs'
-import { map, tap, filter, switchMap, take } from 'rxjs/operators'
-import { LoginRedirect, CheckSession } from '../../shared/actions/user.action'
-import { AuthState } from '../../shared/state/auth.state'
+import { Injectable } from '@angular/core';
+import { CanActivate } from '@angular/router';
+import { Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { filter, map, switchMap, take } from 'rxjs/operators';
+import { LoginRedirect } from '../shared/actions/user.action';
+import { AuthState } from '../shared/state/auth.state';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthenticatedGuard implements CanActivate {
   constructor(private store: Store) {}
 
@@ -25,5 +27,6 @@ export class AuthenticatedGuard implements CanActivate {
         )
       )
     )
+
   }
 }

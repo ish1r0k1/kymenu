@@ -9,9 +9,9 @@ import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { CoreModule } from './core/core.module';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { AuthState } from './shared/state/auth.state';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
@@ -23,6 +23,7 @@ import { AuthState } from './shared/state/auth.state';
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
     AngularFirestoreModule,
     NgxsModule.forRoot([AuthState], {
       developmentMode: !environment.production
@@ -31,7 +32,6 @@ import { AuthState } from './shared/state/auth.state';
       disabled: environment.production
     }),
     NgxsRouterPluginModule.forRoot(),
-    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
